@@ -1,1 +1,860 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IPOP – Portafoli Professional ASIX</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1eb;
+    --bg2: #eae7e0;
+    --surface: #ffffff;
+    --surface2: #f9f7f4;
+    --text: #1a1814;
+    --text2: #4a4740;
+    --text3: #7a7670;
+    --accent: #2d5016;
+    --accent2: #4a7c25;
+    --accent-light: #e8f0e0;
+    --border: #d4d0c8;
+    --nav-h: 68px;
+    --radius: 12px;
+    --shadow: 0 2px 20px rgba(0,0,0,0.06);
+  }
+  [data-theme="dark"] {
+    --bg: #0f0f0d;
+    --bg2: #1a1a16;
+    --surface: #1f1f1a;
+    --surface2: #252520;
+    --text: #f0ede8;
+    --text2: #b8b5ae;
+    --text3: #7a7770;
+    --accent: #7ab843;
+    --accent2: #96d055;
+    --accent-light: #1a2910;
+    --border: #2e2e28;
+    --shadow: 0 2px 20px rgba(0,0,0,0.3);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Space Grotesk', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    transition: background 0.3s, color 0.3s;
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    height: var(--nav-h);
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2rem;
+    z-index: 100;
+    transition: background 0.3s, border-color 0.3s;
+  }
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.3rem;
+    color: var(--accent);
+    letter-spacing: -0.02em;
+    text-decoration: none;
+  }
+  .nav-links {
+    display: flex; gap: 0.25rem; align-items: center;
+  }
+  .nav-links a {
+    text-decoration: none;
+    color: var(--text2);
+    font-size: 0.85rem;
+    font-weight: 500;
+    padding: 0.4rem 0.75rem;
+    border-radius: 6px;
+    transition: color 0.2s, background 0.2s;
+  }
+  .nav-links a:hover { color: var(--text); background: var(--bg2); }
+  .nav-controls {
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .lang-btn, .theme-btn {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    color: var(--text2);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 0.35rem 0.65rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .lang-btn:hover, .theme-btn:hover { color: var(--text); border-color: var(--accent); }
+  .lang-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .theme-btn { font-size: 1rem; padding: 0.35rem 0.55rem; }
+
+  /* MAIN */
+  main { padding-top: var(--nav-h); }
+
+  /* SECTIONS */
+  section {
+    padding: 5rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .container { max-width: 900px; margin: 0 auto; padding: 0 2rem; }
+
+  /* HERO */
+  #inici {
+    background: var(--surface);
+    padding: 6rem 0 5rem;
+  }
+  .hero-inner {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 3rem;
+    align-items: center;
+  }
+  .hero-tag {
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent2);
+    margin-bottom: 1rem;
+  }
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    color: var(--text);
+    margin-bottom: 1.25rem;
+  }
+  h1 span { color: var(--accent); }
+  .hero-desc {
+    font-size: 1.05rem;
+    color: var(--text2);
+    max-width: 520px;
+    margin-bottom: 2rem;
+  }
+  .hero-links {
+    display: flex; gap: 0.75rem; flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    padding: 0.65rem 1.25rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.88rem;
+    transition: all 0.2s;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: #fff;
+  }
+  .btn-primary:hover { background: var(--accent2); transform: translateY(-1px); }
+  .btn-outline {
+    background: transparent;
+    color: var(--text);
+    border: 1.5px solid var(--border);
+  }
+  .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* FOTO */
+  .photo-wrap {
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid var(--border);
+    background: var(--bg2);
+    position: relative;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+  .photo-wrap img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .photo-overlay {
+    position: absolute; inset: 0;
+    background: rgba(0,0,0,0.5);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    opacity: 0;
+    transition: opacity 0.2s;
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: 600;
+    gap: 0.35rem;
+  }
+  .photo-wrap:hover .photo-overlay { opacity: 1; }
+  .photo-icon { font-size: 1.5rem; }
+  #photo-input { display: none; }
+
+  /* SECCIÓ TÍTOL */
+  .section-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent2);
+    margin-bottom: 0.5rem;
+  }
+  h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+  }
+
+  /* COMPETÈNCIES */
+  #curriculum { background: var(--bg); }
+  .comp-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+    margin-top: 2rem;
+  }
+  .comp-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .comp-card:hover { border-color: var(--accent); box-shadow: var(--shadow); }
+  .comp-card-icon {
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+  }
+  .comp-card h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 0.75rem;
+  }
+  .skill-pill {
+    display: inline-block;
+    background: var(--accent-light);
+    color: var(--accent);
+    font-size: 0.78rem;
+    font-weight: 600;
+    padding: 0.25rem 0.65rem;
+    border-radius: 20px;
+    margin: 0.2rem 0.15rem;
+  }
+  [data-theme="dark"] .skill-pill { background: #1f3010; color: var(--accent2); }
+  .comm-plan {
+    margin-top: 2.5rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.75rem;
+  }
+  .comm-plan h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 1rem;
+  }
+  .comm-links {
+    display: flex; gap: 0.75rem; flex-wrap: wrap;
+  }
+  .comm-link {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    color: var(--text2);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    transition: all 0.2s;
+  }
+  .comm-link:hover { color: var(--accent); border-color: var(--accent); background: var(--accent-light); }
+
+  /* ESPECIALITZACIÓ */
+  #especialitzacio { background: var(--surface); }
+  .spec-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+  .spec-card {
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem 1.25rem;
+    text-align: center;
+    transition: all 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .spec-card.featured {
+    border-color: var(--accent);
+    background: var(--accent-light);
+  }
+  [data-theme="dark"] .spec-card.featured { background: #1a2910; }
+  .spec-card.featured::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--accent);
+  }
+  .spec-card:hover { border-color: var(--accent2); transform: translateY(-2px); box-shadow: var(--shadow); }
+  .spec-icon { font-size: 2rem; margin-bottom: 0.75rem; display: block; }
+  .spec-card h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--text);
+  }
+  .spec-card p { font-size: 0.82rem; color: var(--text2); }
+  .spec-featured-badge {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    margin-bottom: 0.5rem;
+  }
+
+  /* PLA FORMACIÓ */
+  #pla-formacio { background: var(--bg); }
+  .timeline {
+    margin-top: 2rem;
+    position: relative;
+    padding-left: 2rem;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0.4rem; top: 0.5rem; bottom: 0.5rem;
+    width: 2px;
+    background: var(--border);
+    border-radius: 2px;
+  }
+  .tl-item {
+    position: relative;
+    padding-bottom: 2rem;
+  }
+  .tl-item:last-child { padding-bottom: 0; }
+  .tl-dot {
+    position: absolute;
+    left: -2rem;
+    top: 0.35rem;
+    width: 1rem; height: 1rem;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 2px solid var(--bg);
+    box-shadow: 0 0 0 2px var(--accent);
+  }
+  .tl-time {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent2);
+    margin-bottom: 0.25rem;
+  }
+  .tl-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 0.35rem;
+  }
+  .tl-desc { font-size: 0.9rem; color: var(--text2); }
+
+  /* CONTACTE */
+  #contacte { background: var(--surface); }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+    margin-top: 2rem;
+  }
+  .contact-card {
+    display: flex; align-items: center; gap: 1rem;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.25rem 1.5rem;
+    text-decoration: none;
+    color: var(--text);
+    transition: all 0.2s;
+  }
+  .contact-card:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: var(--shadow); }
+  .contact-icon { font-size: 1.6rem; flex-shrink: 0; }
+  .contact-label { font-size: 0.75rem; color: var(--text3); font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
+  .contact-value { font-size: 0.9rem; color: var(--text); font-weight: 500; word-break: break-all; }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 2rem;
+    font-size: 0.8rem;
+    color: var(--text3);
+    background: var(--bg);
+    border-top: 1px solid var(--border);
+  }
+
+  /* MOBILE */
+  @media (max-width: 700px) {
+    .hero-inner { grid-template-columns: 1fr; }
+    .photo-wrap { width: 140px; height: 140px; }
+    .comp-grid, .contact-grid { grid-template-columns: 1fr; }
+    .spec-grid { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+  }
+
+  /* Scroll reveal */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s, transform 0.5s;
+  }
+  .reveal.visible { opacity: 1; transform: none; }
+</style>
+</head>
+<body data-theme="light">
+
+<!-- NAV -->
+<nav>
+  <a href="#inici" class="nav-logo" id="nav-name">SHAYAN ALI KOUSAR</a>
+  <div class="nav-links">
+    <a href="#inici" data-i18n="nav_inici">Inici</a>
+    <a href="#curriculum" data-i18n="nav_curriculum">Currículum</a>
+    <a href="#especialitzacio" data-i18n="nav_especialitzacio">Especialització</a>
+    <a href="#pla-formacio" data-i18n="nav_pla">Pla de Formació</a>
+    <a href="#contacte" data-i18n="nav_contacte">Contacte</a>
+  </div>
+  <div class="nav-controls">
+    <button class="lang-btn active" onclick="setLang('ca')">CA</button>
+    <button class="lang-btn" onclick="setLang('es')">ES</button>
+    <button class="lang-btn" onclick="setLang('en')">EN</button>
+    <button class="theme-btn" onclick="toggleTheme()" title="Mode nocturn/clar">☀️</button>
+  </div>
+</nav>
+
+<!-- HERO / INICI -->
+<section id="inici">
+  <div class="container">
+    <div class="hero-inner">
+      <div>
+        <p class="hero-tag" data-i18n="hero_tag">Estudiant ASIX · Cicle Formatiu de Grau Superior</p>
+        <h1 data-i18n="hero_h1">Hola, soc<br><span id="hero-name">SHAYAN ALI KOUSAR</span></h1>
+        <p class="hero-desc" data-i18n="hero_desc">
+          Estudiant del cicle ASIX, apassionat per la seguretat informàtica i la gestió de xarxes. Aquest espai recull el meu camí professional i els projectes realitzats durant la meva formació.
+        </p>
+        <div class="hero-links">
+          <a href="#contacte" class="btn btn-primary" data-i18n="btn_contacte">📬 Contacta'm</a>
+          <a href="https://linkedin.com" target="_blank" class="btn btn-outline">💼 LinkedIn</a>
+          <a href="https://github.com" target="_blank" class="btn btn-outline">💻 GitHub</a>
+        </div>
+      </div>
+      <div>
+        <div class="photo-wrap" onclick="document.getElementById('photo-input').click()">
+          <img id="profile-photo" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'%3E%3Crect width='200' height='200' fill='%23e8f0e0'/%3E%3Ccircle cx='100' cy='80' r='38' fill='%23b8d4a0'/%3E%3Cellipse cx='100' cy='180' rx='60' ry='40' fill='%23b8d4a0'/%3E%3C/svg%3E" alt="Foto de perfil">
+          <div class="photo-overlay">
+            <span class="photo-icon">📷</span>
+            <span data-i18n="change_photo">Canviar foto</span>
+          </div>
+        </div>
+        <input type="file" id="photo-input" accept="image/*" onchange="changePhoto(event)">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CURRÍCULUM -->
+<section id="curriculum">
+  <div class="container reveal">
+    <p class="section-label" data-i18n="sec_curriculum_label">02 — Perfil professional</p>
+    <h2 data-i18n="sec_curriculum_h2">Currículum per Competències</h2>
+    <p style="color: var(--text2); max-width: 600px;" data-i18n="sec_curriculum_desc">
+      Habilitats tècniques i transversals desenvolupades al llarg del cicle formatiu ASIX, orientades a un perfil professional competent i polivalent.
+    </p>
+
+    <div class="comp-grid">
+      <div class="comp-card">
+        <div class="comp-card-icon">🖧</div>
+        <h3 data-i18n="comp_xarxes">Xarxes i Infraestructures</h3>
+        <div>
+          <span class="skill-pill">TCP/IP</span>
+          <span class="skill-pill">VLAN</span>
+          <span class="skill-pill">Routing</span>
+          <span class="skill-pill">Cisco</span>
+          <span class="skill-pill">Firewall</span>
+          <span class="skill-pill">VPN</span>
+        </div>
+      </div>
+      <div class="comp-card">
+        <div class="comp-card-icon">🐧</div>
+        <h3 data-i18n="comp_sistemes">Sistemes Operatius</h3>
+        <div>
+          <span class="skill-pill">Linux / Debian</span>
+          <span class="skill-pill">Windows Server</span>
+          <span class="skill-pill">Active Directory</span>
+          <span class="skill-pill">Bash</span>
+          <span class="skill-pill">PowerShell</span>
+        </div>
+      </div>
+      <div class="comp-card">
+        <div class="comp-card-icon">☁️</div>
+        <h3 data-i18n="comp_cloud">Cloud i Virtualització</h3>
+        <div>
+          <span class="skill-pill">VMware</span>
+          <span class="skill-pill">VirtualBox</span>
+          <span class="skill-pill">Docker</span>
+          <span class="skill-pill">AWS (bàsic)</span>
+          <span class="skill-pill">Azure (bàsic)</span>
+        </div>
+      </div>
+      <div class="comp-card">
+        <div class="comp-card-icon">🤝</div>
+        <h3 data-i18n="comp_transversals">Competències Transversals</h3>
+        <div>
+          <span class="skill-pill">Treball en equip</span>
+          <span class="skill-pill">Resolució de problemes</span>
+          <span class="skill-pill">Comunicació tècnica</span>
+          <span class="skill-pill">Adaptabilitat</span>
+          <span class="skill-pill">Aprenentatge continu</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="comm-plan">
+      <h3 data-i18n="comm_plan_h">🌐 Pla de comunicació del perfil professional</h3>
+      <p style="font-size:0.88rem; color:var(--text2); margin-bottom:1rem;" data-i18n="comm_plan_desc">On pots trobar-me i seguir el meu desenvolupament professional:</p>
+      <div class="comm-links">
+        <a href="https://linkedin.com" target="_blank" class="comm-link">💼 LinkedIn</a>
+        <a href="https://github.com" target="_blank" class="comm-link">💻 GitHub</a>
+        <a href="#" class="comm-link">🌍 <span data-i18n="web_personal">Web personal</span></a>
+        <a href="#" class="comm-link">📁 Portfoli</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ESPECIALITZACIÓ -->
+<section id="especialitzacio">
+  <div class="container reveal">
+    <p class="section-label" data-i18n="sec_spec_label">03 — Orientació professional</p>
+    <h2 data-i18n="sec_spec_h2">Àmbit d'Especialització</h2>
+    <p style="color: var(--text2); max-width: 600px;" data-i18n="sec_spec_desc">
+      Estic interessat a desenvolupar-me professionalment en la gestió de xarxes informàtiques i la seguretat, especialment en entorns corporatius i cloud.
+    </p>
+
+    <div class="spec-grid">
+      <div class="spec-card featured">
+        <span class="spec-featured-badge" data-i18n="badge_main">Principal</span>
+        <span class="spec-icon">🔒</span>
+        <h3 data-i18n="spec1_h">Ciberseguretat</h3>
+        <p data-i18n="spec1_p">Tècnic de seguretat, pentesting, SOC analyst, gestió d'incidències i seguretat perimetral.</p>
+      </div>
+      <div class="spec-card">
+        <span class="spec-icon">🖥️</span>
+        <h3 data-i18n="spec2_h">Administració de Sistemes</h3>
+        <p data-i18n="spec2_p">SysAdmin Linux/Windows, gestió de servidors, automatització i monitorització d'infraestructures.</p>
+      </div>
+      <div class="spec-card">
+        <span class="spec-icon">☁️</span>
+        <h3 data-i18n="spec3_h">Cloud & DevOps</h3>
+        <p data-i18n="spec3_p">Migració a cloud, contenidors, CI/CD, gestió de serveis AWS/Azure en entorns empresarials.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PLA DE FORMACIÓ -->
+<section id="pla-formacio">
+  <div class="container reveal">
+    <p class="section-label" data-i18n="sec_pla_label">04 — Objectius i formació</p>
+    <h2 data-i18n="sec_pla_h2">Pla de Formació Professional</h2>
+    <p style="color: var(--text2); max-width: 600px;" data-i18n="sec_pla_desc">
+      Ruta planificada per assolir els meus objectius professionals en el sector IT.
+    </p>
+
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <p class="tl-time">2024 – 2025</p>
+        <p class="tl-title" data-i18n="tl1_title">Finalitzar el cicle ASIX</p>
+        <p class="tl-desc" data-i18n="tl1_desc">Completar els mòduls del cicle formatiu i realitzar les pràctiques FCT en una empresa del sector.</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <p class="tl-time">2025</p>
+        <p class="tl-title" data-i18n="tl2_title">Certificació CompTIA Security+</p>
+        <p class="tl-desc" data-i18n="tl2_desc">Obtenir la certificació de seguretat informàtica reconeguda internacionalment per accedir a posicions de tècnic en ciberseguretat.</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <p class="tl-time">2025 – 2026</p>
+        <p class="tl-title" data-i18n="tl3_title">Experiència laboral + AWS Cloud Practitioner</p>
+        <p class="tl-desc" data-i18n="tl3_desc">Accedir al mercat laboral com a tècnic junior i simultàniament obtenir la certificació AWS Cloud Practitioner.</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <p class="tl-time">2026 – 2028</p>
+        <p class="tl-title" data-i18n="tl4_title">Màster en Ciberseguretat</p>
+        <p class="tl-desc" data-i18n="tl4_desc">Cursar un màster especialitzat en ciberseguretat per aprofundir en àrees com pentest, forense digital i seguretat en cloud.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTE -->
+<section id="contacte">
+  <div class="container reveal">
+    <p class="section-label" data-i18n="sec_contact_label">05 — Connexió professional</p>
+    <h2 data-i18n="sec_contact_h2">Contacte</h2>
+    <p style="color: var(--text2); max-width: 500px;" data-i18n="sec_contact_desc">
+      Estic obert a oportunitats professionals, col·laboracions i connexions en el sector IT.
+    </p>
+
+    <div class="contact-grid">
+      <a href="mailto:shayanalipak7@gmail.com" class="contact-card">
+        <span class="contact-icon">✉️</span>
+        <div>
+          <p class="contact-label" data-i18n="label_email">Correu electrònic</p>
+          <p class="contact-value">shayanalipak7@gmail.com</p>
+        </div>
+      </a>
+      <a href="https://linkedin.com" target="_blank" class="contact-card">
+        <span class="contact-icon">💼</span>
+        <div>
+          <p class="contact-label">LinkedIn</p>
+          <p class="contact-value">linkedin.com/in/shayan-kousar</p>
+        </div>
+      </a>
+      <a href="https://github.com" target="_blank" class="contact-card">
+        <span class="contact-icon">💻</span>
+        <div>
+          <p class="contact-label">GitHub</p>
+          <p class="contact-value">github.com/shayandba</p>
+        </div>
+      </a>
+      <a href="https://t.me/shayandba" target="_blank" class="contact-card">
+        <span class="contact-icon">✈️</span>
+        <div>
+          <p class="contact-label">Telegram</p>
+          <p class="contact-value">@ShayanAliKousar</p>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p data-i18n="footer">© 2025 · Portafoli professional ASIX · Fet amb 💚</p>
+</footer>
+
+<script>
+const translations = {
+  ca: {
+    nav_inici: "Inici", nav_curriculum: "Currículum", nav_especialitzacio: "Especialització",
+    nav_pla: "Pla de Formació", nav_contacte: "Contacte",
+    hero_tag: "Estudiant ASIX · Cicle Formatiu de Grau Superior",
+    hero_h1: "Hola, soc",
+    hero_desc: "Estudiant del cicle ASIX, apassionat per la seguretat informàtica i la gestió de xarxes. Aquest espai recull el meu camí professional i els projectes realitzats durant la meva formació.",
+    btn_contacte: "📬 Contacta'm",
+    change_photo: "Canviar foto",
+    sec_curriculum_label: "02 — Perfil professional",
+    sec_curriculum_h2: "Currículum per Competències",
+    sec_curriculum_desc: "Habilitats tècniques i transversals desenvolupades al llarg del cicle formatiu ASIX, orientades a un perfil professional competent i polivalent.",
+    comp_xarxes: "Xarxes i Infraestructures",
+    comp_sistemes: "Sistemes Operatius",
+    comp_cloud: "Cloud i Virtualització",
+    comp_transversals: "Competències Transversals",
+    comm_plan_h: "🌐 Pla de comunicació del perfil professional",
+    comm_plan_desc: "On pots trobar-me i seguir el meu desenvolupament professional:",
+    web_personal: "Web personal",
+    sec_spec_label: "03 — Orientació professional",
+    sec_spec_h2: "Àmbit d'Especialització",
+    sec_spec_desc: "Estic interessat a desenvolupar-me professionalment en la gestió de xarxes informàtiques i la seguretat, especialment en entorns corporatius i cloud.",
+    badge_main: "Principal",
+    spec1_h: "Ciberseguretat",
+    spec1_p: "Tècnic de seguretat, pentesting, SOC analyst, gestió d'incidències i seguretat perimetral.",
+    spec2_h: "Administració de Sistemes",
+    spec2_p: "SysAdmin Linux/Windows, gestió de servidors, automatització i monitorització d'infraestructures.",
+    spec3_h: "Cloud & DevOps",
+    spec3_p: "Migració a cloud, contenidors, CI/CD, gestió de serveis AWS/Azure en entorns empresarials.",
+    sec_pla_label: "04 — Objectius i formació",
+    sec_pla_h2: "Pla de Formació Professional",
+    sec_pla_desc: "Ruta planificada per assolir els meus objectius professionals en el sector IT.",
+    tl1_title: "Finalitzar el cicle ASIX",
+    tl1_desc: "Completar els mòduls del cicle formatiu i realitzar les pràctiques FCT en una empresa del sector.",
+    tl2_title: "Certificació CompTIA Security+",
+    tl2_desc: "Obtenir la certificació de seguretat informàtica reconeguda internacionalment per accedir a posicions de tècnic en ciberseguretat.",
+    tl3_title: "Experiència laboral + AWS Cloud Practitioner",
+    tl3_desc: "Accedir al mercat laboral com a tècnic junior i simultàniament obtenir la certificació AWS Cloud Practitioner.",
+    tl4_title: "Màster en Ciberseguretat",
+    tl4_desc: "Cursar un màster especialitzat en ciberseguretat per aprofundir en àrees com pentest, forense digital i seguretat en cloud.",
+    sec_contact_label: "05 — Connexió professional",
+    sec_contact_h2: "Contacte",
+    sec_contact_desc: "Estic obert a oportunitats professionals, col·laboracions i connexions en el sector IT.",
+    label_email: "Correu electrònic",
+    footer: "© 2025 · Portafoli professional ASIX · Fet amb 💚"
+  },
+  es: {
+    nav_inici: "Inicio", nav_curriculum: "Currículum", nav_especialitzacio: "Especialización",
+    nav_pla: "Plan de Formación", nav_contacte: "Contacto",
+    hero_tag: "Estudiante ASIX · Ciclo Formativo de Grado Superior",
+    hero_h1: "Hola, soy",
+    hero_desc: "Estudiante del ciclo ASIX, apasionado por la seguridad informática y la gestión de redes. Este espacio recoge mi camino profesional y los proyectos realizados durante mi formación.",
+    btn_contacte: "📬 Contáctame",
+    change_photo: "Cambiar foto",
+    sec_curriculum_label: "02 — Perfil profesional",
+    sec_curriculum_h2: "Currículum por Competencias",
+    sec_curriculum_desc: "Habilidades técnicas y transversales desarrolladas a lo largo del ciclo formativo ASIX, orientadas a un perfil profesional competente y polivalente.",
+    comp_xarxes: "Redes e Infraestructuras",
+    comp_sistemes: "Sistemas Operativos",
+    comp_cloud: "Cloud y Virtualización",
+    comp_transversals: "Competencias Transversales",
+    comm_plan_h: "🌐 Plan de comunicación del perfil profesional",
+    comm_plan_desc: "Dónde puedes encontrarme y seguir mi desarrollo profesional:",
+    web_personal: "Web personal",
+    sec_spec_label: "03 — Orientación profesional",
+    sec_spec_h2: "Ámbito de Especialización",
+    sec_spec_desc: "Estoy interesado en desarrollarme profesionalmente en la gestión de redes informáticas y la seguridad, especialmente en entornos corporativos y cloud.",
+    badge_main: "Principal",
+    spec1_h: "Ciberseguridad",
+    spec1_p: "Técnico de seguridad, pentesting, SOC analyst, gestión de incidencias y seguridad perimetral.",
+    spec2_h: "Administración de Sistemas",
+    spec2_p: "SysAdmin Linux/Windows, gestión de servidores, automatización y monitorización de infraestructuras.",
+    spec3_h: "Cloud & DevOps",
+    spec3_p: "Migración a cloud, contenedores, CI/CD, gestión de servicios AWS/Azure en entornos empresariales.",
+    sec_pla_label: "04 — Objetivos y formación",
+    sec_pla_h2: "Plan de Formación Profesional",
+    sec_pla_desc: "Ruta planificada para alcanzar mis objetivos profesionales en el sector IT.",
+    tl1_title: "Finalizar el ciclo ASIX",
+    tl1_desc: "Completar los módulos del ciclo formativo y realizar las prácticas FCT en una empresa del sector.",
+    tl2_title: "Certificación CompTIA Security+",
+    tl2_desc: "Obtener la certificación de seguridad informática reconocida internacionalmente para acceder a posiciones de técnico en ciberseguridad.",
+    tl3_title: "Experiencia laboral + AWS Cloud Practitioner",
+    tl3_desc: "Acceder al mercado laboral como técnico junior y simultáneamente obtener la certificación AWS Cloud Practitioner.",
+    tl4_title: "Máster en Ciberseguridad",
+    tl4_desc: "Cursar un máster especializado en ciberseguridad para profundizar en áreas como pentest, forense digital y seguridad en cloud.",
+    sec_contact_label: "05 — Conexión profesional",
+    sec_contact_h2: "Contacto",
+    sec_contact_desc: "Estoy abierto a oportunidades profesionales, colaboraciones y conexiones en el sector IT.",
+    label_email: "Correo electrónico",
+    footer: "© 2025 · Portafolio profesional ASIX · Hecho con 💚"
+  },
+  en: {
+    nav_inici: "Home", nav_curriculum: "Curriculum", nav_especialitzacio: "Specialization",
+    nav_pla: "Training Plan", nav_contacte: "Contact",
+    hero_tag: "ASIX Student · Higher Vocational Training",
+    hero_h1: "Hi, I'm",
+    hero_desc: "ASIX student passionate about cybersecurity and network management. This space showcases my professional journey and the projects developed throughout my training.",
+    btn_contacte: "📬 Contact me",
+    change_photo: "Change photo",
+    sec_curriculum_label: "02 — Professional profile",
+    sec_curriculum_h2: "Competency-Based Curriculum",
+    sec_curriculum_desc: "Technical and transversal skills developed throughout the ASIX training cycle, aimed at a competent and versatile professional profile.",
+    comp_xarxes: "Networks & Infrastructure",
+    comp_sistemes: "Operating Systems",
+    comp_cloud: "Cloud & Virtualization",
+    comp_transversals: "Transversal Skills",
+    comm_plan_h: "🌐 Professional profile communication plan",
+    comm_plan_desc: "Where you can find me and follow my professional development:",
+    web_personal: "Personal website",
+    sec_spec_label: "03 — Professional orientation",
+    sec_spec_h2: "Specialization Area",
+    sec_spec_desc: "I am interested in developing professionally in network management and security, especially in corporate and cloud environments.",
+    badge_main: "Main",
+    spec1_h: "Cybersecurity",
+    spec1_p: "Security technician, pentesting, SOC analyst, incident management and perimeter security.",
+    spec2_h: "Systems Administration",
+    spec2_p: "Linux/Windows SysAdmin, server management, automation and infrastructure monitoring.",
+    spec3_h: "Cloud & DevOps",
+    spec3_p: "Cloud migration, containers, CI/CD, AWS/Azure services management in enterprise environments.",
+    sec_pla_label: "04 — Goals and training",
+    sec_pla_h2: "Professional Training Plan",
+    sec_pla_desc: "Planned roadmap to achieve my professional goals in the IT sector.",
+    tl1_title: "Complete the ASIX cycle",
+    tl1_desc: "Complete all training modules and carry out the FCT internship at a company in the sector.",
+    tl2_title: "CompTIA Security+ Certification",
+    tl2_desc: "Obtain the internationally recognized cybersecurity certification to access technical cybersecurity positions.",
+    tl3_title: "Work experience + AWS Cloud Practitioner",
+    tl3_desc: "Enter the job market as a junior technician while simultaneously obtaining the AWS Cloud Practitioner certification.",
+    tl4_title: "Master's in Cybersecurity",
+    tl4_desc: "Pursue a specialized master's degree in cybersecurity to deepen knowledge in areas such as pentesting, digital forensics and cloud security.",
+    sec_contact_label: "05 — Professional connection",
+    sec_contact_h2: "Contact",
+    sec_contact_desc: "I am open to professional opportunities, collaborations and connections in the IT sector.",
+    label_email: "Email address",
+    footer: "© 2025 · ASIX Professional Portfolio · Made with 💚"
+  }
+};
+
+let currentLang = 'ca';
+
+function setLang(lang) {
+  currentLang = lang;
+  const t = translations[lang];
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (t[key]) el.textContent = t[key];
+  });
+  document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+  event.target.classList.add('active');
+  document.documentElement.lang = lang === 'ca' ? 'ca' : lang === 'es' ? 'es' : 'en';
+}
+
+function toggleTheme() {
+  const body = document.body;
+  const btn = document.querySelector('.theme-btn');
+  if (body.getAttribute('data-theme') === 'dark') {
+    body.setAttribute('data-theme', 'light');
+    btn.textContent = '☀️';
+  } else {
+    body.setAttribute('data-theme', 'dark');
+    btn.textContent = '🌙';
+  }
+}
+
+function changePhoto(event) {
+  const file = event.target.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = e => {
+      document.getElementById('profile-photo').src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+}
+
+// Scroll reveal
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add('visible');
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
 
